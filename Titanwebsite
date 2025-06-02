@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AVX Reg - Free Fire Regedits & Panels</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0a0a0a;
+            color: white;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .neon-text {
+            text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 15px #ff0000, 0 0 20px #ff0000;
+        }
+        
+        .neon-border {
+            box-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 15px #ff0000, 0 0 20px #ff0000;
+        }
+        
+        .neon-card {
+            transition: all 0.3s ease;
+        }
+        
+        .neon-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 15px #ff0000, 0 0 25px #ff0000, 0 0 35px #ff0000;
+        }
+        
+        .social-icon {
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            transform: scale(1.2);
+            filter: drop-shadow(0 0 5px #ff0000);
+        }
+        
+        .cart-panel {
+            transition: all 0.3s ease;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 0.7; }
+            50% { opacity: 1; }
+            100% { opacity: 0.7; }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #ff0000;
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ff3333;
+        }
+    </style>
+</head>
+<body>
+    <!-- Audio Player (autoplay muted by default) -->
+    <audio id="bgMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+    
+    <!-- Music Control Button -->
+    <div class="fixed bottom-4 right-4 z-50">
+        <button id="musicToggle" class="bg-red-600 hover:bg-red-700 text-white rounded-full w-12 h-12 flex items-center justify-center neon-border">
+            <i class="fas fa-music text-xl"></i>
+        </button>
+    </div>
+    
+    <!-- Navigation -->
+    <nav class="bg-black bg-opacity-80 backdrop-filter backdrop-blur-lg fixed w-full z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <img class="h-10 w-10" src="https://via.placeholder.com/40" alt="Logo">
+                    </div>
+                    <div class="hidden md:block">
+                        <div class="ml-10 flex items-baseline space-x-4">
+                            <a href="#home" class="neon-text px-3 py-2 rounded-md text-sm font-medium hover:text-red-400 transition">Home</a>
+                            <a href="#regedits" class="neon-text px-3 py-2 rounded-md text-sm font-medium hover:text-red-400 transition">Regedits</a>
+                            <a href="#panels" class="neon-text px-3 py-2 rounded-md text-sm font-medium hover:text-red-400 transition">Panels</a>
+                            <a href="#about" class="neon-text px-3 py-2 rounded-md text-sm font-medium hover:text-red-400 transition">About</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center">
+                    <button id="cartBtn" class="relative p-2 text-gray-400 hover:text-white focus:outline-none">
+                        <i class="fas fa-shopping-cart text-xl"></i>
+                        <span id="cartCount" class="absolute -top-1 -right-1 bg-red-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0">
+            <img src="https://i.gifer.com/7VA.gif" class="w-full h-full object-cover opacity-30">
+        </div>
+        <div class="relative z-10 text-center px-4">
+            <h1 class="text-5xl md:text-7xl font-bold mb-4 neon-text">AVX REG</h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-2xl mx-auto">Premium Free Fire Regedits & Panels at Affordable Prices</p>
+            <div class="flex justify-center space-x-4">
+                <a href="#regedits" class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-full font-medium transition transform hover:scale-105 neon-border">Browse Regedits</a>
+                <a href="#panels" class="bg-transparent border-2 border-red-600 hover:bg-red-600 text-white px-6 py-3 rounded-full font-medium transition transform hover:scale-105">Explore Panels</a>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-10 left-0 right-0 flex justify-center">
+            <a href="#regedits" class="text-white animate-bounce">
+                <i class="fas fa-chevron-down text-3xl"></i>
+            </a>
+        </div>
+    </section>
+    
+    <!-- Regedits Section -->
+    <section id="regedits" class="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black to-gray-900">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl font-bold mb-12 text-center neon-text">REGEDITS</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Normal Regedit -->
+                <div class="bg-gray-800 bg-opacity-70 rounded-xl p-6 neon-card">
+                    <div class="text-center mb-6">
+                        <h3 class="text-2xl font-bold mb-2 neon-text">NORMAL</h3>
+                        <div class="text-4xl font-bold text-red-500 mb-4">₹800</div>
+                        <div class="h-1 bg-red-600 w-20 mx-auto mb-4"></div>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Basic Features</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Standard Performance</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Limited Customization</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Regular Updates</span>
+                        </li>
+                    </ul>
+                    <div class="flex space-x-3">
+                        <button onclick="addToCart('Normal Regedit', 800)" class="flex-1 bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-lg transition">Add to Cart</button>
+                        <button onclick="buyNow('Normal Regedit', 800)" class="flex-1 bg-transparent border border-red-600 hover:bg-red-600 text-white py-2 px-4 rounded-lg transition">Buy Now</button>
+                    </div>
+                </div>
+                
+                <!-- Basic Regedit -->
+                <div class="bg-gray-800 bg-opacity-70 rounded-xl p-6 neon-card transform scale-105">
+                    <div class="text-center mb-6">
+                        <div class="absolute top-0 right-0 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg">POPULAR</div>
+                        <h3 class="text-2xl font-bold mb-2 neon-text">BASIC</h3>
+                        <div class="text-4xl font-bold text-red-500 mb-4">₹1200</div>
+                        <div class="h-1 bg-red-600 w-20 mx-auto mb-4"></div>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Enhanced Features</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Better Performance</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>More Customization</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Priority Support</span>
+                        </li>
+                    </ul>
+                    <div class="flex space-x-3">
+                        <button onclick="addToCart('Basic Regedit', 1200)" class="flex-1 bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-lg transition">Add to Cart</button>
+                        <button onclick="buyNow('Basic Regedit', 1200)" class="flex-1 bg-transparent border border-red-600 hover:bg-red-600 text-white py-2 px-4 rounded-lg transition">Buy Now</button>
+                    </div>
+                </div>
+                
+                <!-- Premium Regedit -->
+                <div class="bg-gray-800 bg-opacity-70 rounded-xl p-6 neon-card">
+                    <div class="text-center mb-6">
+                        <h3 class="text-2xl font-bold mb-2 neon-text">PREMIUM</h3>
+                        <div class="text-4xl font-bold text-red-500 mb-4">₹1800</div>
+                        <div class="h-1 bg-red-600 w-20 mx-auto mb-4"></div>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>All Features Unlocked</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Best Performance</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Full Customization</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>24/7 Premium Support</span>
+                        </li>
+                    </ul>
+                    <div class="flex space-x-3">
+                        <button onclick="addToCart('Premium Regedit', 1800)" class="flex-1 bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-lg transition">Add to Cart</button>
+                        <button onclick="buyNow('Premium Regedit', 1800)" class="flex-1 bg-transparent border border-red-600 hover:bg-red-600 text-white py-2 px-4 rounded-lg transition">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Panels Section -->
+    <section id="panels" class="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-900 to-black">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl font-bold mb-12 text-center neon-text">PANELS</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Normal Panel -->
+                <div class="bg-gray-800 bg-opacity-70 rounded-xl p-6 neon-card">
+                    <div class="text-center mb-6">
+                        <h3 class="text-2xl font-bold mb-2 neon-text">NORMAL</h3>
+                        <div class="text-4xl font-bold text-red-500 mb-4">₹800</div>
+                        <div class="h-1 bg-red-600 w-20 mx-auto mb-4"></div>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Basic Panel Features</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Standard UI</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Limited Controls</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Regular Updates</span>
+                        </li>
+                    </ul>
+                    <div class="flex space-x-3">
+                        <button onclick="addToCart('Normal Panel', 800)" class="flex-1 bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-lg transition">Add to Cart</button>
+                        <button onclick="buyNow('Normal Panel', 800)" class="flex-1 bg-transparent border border-red-600 hover:bg-red-600 text-white py-2 px-4 rounded-lg transition">Buy Now</button>
+                    </div>
+                </div>
+                
+                <!-- Basic Panel -->
+                <div class="bg-gray-800 bg-opacity-70 rounded-xl p-6 neon-card transform scale-105">
+                    <div class="text-center mb-6">
+                        <div class="absolute top-0 right-0 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg">BEST VALUE</div>
+                        <h3 class="text-2xl font-bold mb-2 neon-text">BASIC</h3>
+                        <div class="text-4xl font-bold text-red-500 mb-4">₹1200</div>
+                        <div class="h-1 bg-red-600 w-20 mx-auto mb-4"></div>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Enhanced Panel Features</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Improved UI</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>More Controls</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Priority Support</span>
+                        </li>
+                    </ul>
+                    <div class="flex space-x-3">
+                        <button onclick="addToCart('Basic Panel', 1200)" class="flex-1 bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-lg transition">Add to Cart</button>
+                        <button onclick="buyNow('Basic Panel', 1200)" class="flex-1 bg-transparent border border-red-600 hover:bg-red-600 text-white py-2 px-4 rounded-lg transition">Buy Now</button>
+                    </div>
+                </div>
+                
+                <!-- Premium Panel -->
+                <div class="bg-gray-800 bg-opacity-70 rounded-xl p-6 neon-card">
+                    <div class="text-center mb-6">
+                        <h3 class="text-2xl font-bold mb-2 neon-text">PREMIUM</h3>
+                        <div class="text-4xl font-bold text-red-500 mb-4">₹1800</div>
+                        <div class="h-1 bg-red-600 w-20 mx-auto mb-4"></div>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>All Panel Features</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Premium UI</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Full Controls</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>24/7 Premium Support</span>
+                        </li>
+                    </ul>
+                    <div class="flex space-x-3">
+                        <button onclick="addToCart('Premium Panel', 1800)" class="flex-1 bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-lg transition">Add to Cart</button>
+                        <button onclick="buyNow('Premium Panel', 1800)" class="flex-1 bg-transparent border border-red-600 hover:bg-red-600 text-white py-2 px-4 rounded-lg transition">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section id="about" class="py-20 px-4 sm:px-6 lg:px-8 bg-black">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl font-bold mb-12 text-center neon-text">ABOUT US</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 neon-text">WHO WE ARE</h3>
+                    <p class="text-gray-300 mb-6">We are AVX Reg, a team of passionate Free Fire enthusiasts dedicated to providing high-quality regedits and panels to enhance your gaming experience. Our products are carefully crafted to give you the competitive edge you need in the battlefield.</p>
+                    
+                    <h3 class="text-2xl font-bold mb-4 neon-text">WHY CHOOSE US</h3>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-red-500 mr-2"></i>
+                            <span>Premium quality products</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-red-500 mr-2"></i>
+                            <span>Regular updates</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-red-500 mr-2"></i>
+                            <span>Excellent customer support</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-red-500 mr-2"></i>
+                            <span>Affordable pricing</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="relative">
+                    <img src="https://i.gifer.com/origin/79/79e0c4c1a8b6a0a5e0a4d1a8b6a0a5e.gif" class="w-full h-auto rounded-lg neon-border">
+                    <div class="absolute inset-0 bg-red-600 bg-opacity-20 rounded-lg"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4 neon-text">AVX REG</h3>
+                    <p class="text-gray-400">Enhance your Free Fire experience with our premium regedits and panels.</p>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-4 neon-text">QUICK LINKS</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-400 hover:text-red-500 transition">Home</a></li>
+                        <li><a href="#regedits" class="text-gray-400 hover:text-red-500 transition">Regedits</a></li>
+                        <li><a href="#panels" class="text-gray-400 hover:text-red-500 transition">Panels</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-red-500 transition">About</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-4 neon-text">CONTACT US</h3>
+                    <div class="flex space-x-4">
+                        <a href="https://www.instagram.com/avx_reg?igsh=MTR1dHR4bmxwbm53bQ%3D%3D&utm_source=qr" target="_blank" class="social-icon text-2xl text-gray-400 hover:text-pink-600">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://t.me/+rYouZ4vXZ_A3MDJl" target="_blank" class="social-icon text-2xl text-gray-400 hover:text-blue-400">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="http://wa.me/6283867936993" target="_blank" class="social-icon text-2xl text-gray-400 hover:text-green-500">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500">
+                <p>&copy; 2023 AVX Reg. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Cart Panel -->
+    <div id="cartPanel" class="fixed top-0 right-0 h-full w-full md:w-96 bg-gray-900 bg-opacity-95 transform translate-x-full transition-transform duration-300 z-50 overflow-y-auto">
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold neon-text">YOUR CART</h3>
+                <button id="closeCart" class="text-gray-400 hover:text-white">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            
+            <div id="cartItems" class="mb-6 space-y-4">
+                <!-- Cart items will be added here dynamically -->
+                <div class="text-center py-8">
+                    <i class="fas fa-shopping-cart text-4xl text-gray-600 mb-4"></i>
+                    <p class="text-gray-400">Your cart is empty</p>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-4 mb-6">
+                <div class="flex justify-between mb-2">
+                    <span class="text-gray-400">Subtotal:</span>
+                    <span id="cartSubtotal" class="font-bold">₹0</span>
+                </div>
+                <div class="flex justify-between mb-4">
+                    <span class="text-gray-400">Total:</span>
+                    <span id="cartTotal" class="text-xl font-bold text-red-500">₹0</span>
+                </div>
+                
+                <button onclick="checkout()" class="w-full bg-red-600 hover:bg-red-700 text-white py-3 rounded-lg font-bold transition mb-4 neon-border">
+                    PROCEED TO CHECKOUT
+                </button>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-6">
+                <h4 class="text-lg font-bold mb-4 neon-text">CONTACT US TO PURCHASE</h4>
+                <div class="grid grid-cols-3 gap-4">
+                    <a href="https://www.instagram.com/avx_reg?igsh=MTR1dHR4bmxwbm53bQ%3D%3D&utm_source=qr" target="_blank" class="social-icon bg-gray-800 hover:bg-gray-700 text-white p-3 rounded-lg text-center transition">
+                        <i class="fab fa-instagram text-xl mb-1"></i>
+                        <span class="text-xs block">Instagram</span>
+                    </a>
+                    <a href="https://t.me/+rYouZ4vXZ_A3MDJl" target="_blank" class="social-icon bg-gray-800 hover:bg-gray-700 text-white p-3 rounded-lg text-center transition">
+                        <i class="fab fa-telegram text-xl mb-1"></i>
+                        <span class="text-xs block">Telegram</span>
+                    </a>
+                    <a href="http://wa.me/6283867936993" target="_blank" class="social-icon bg-gray-800 hover:bg-gray-700 text-white p-3 rounded-lg text-center transition">
+                        <i class="fab fa-whatsapp text-xl mb-1"></i>
+                        <span class="text-xs block">WhatsApp</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Overlay -->
+    <div id="overlay" class="fixed inset-0 bg-black bg-opacity-70 z-40 hidden"></div>
+    
+    <script>
+        // Cart functionality
+        let cart = [];
+        
+        // DOM elements
+        const cartBtn = document.getElementById('cartBtn');
+        const closeCart = document.getElementById('closeCart');
+        const cartPanel = document.getElementById('cartPanel');
+        const overlay = document.getElementById('overlay');
+        const cartCount = document.getElementById('cartCount');
+        const cartItems = document.getElementById('cartItems');
+        const cartSubtotal = document.getElementById('cartSubtotal');
+        const cartTotal = document.getElementById('cartTotal');
+        const musicToggle = document.getElementById('musicToggle');
+        const bgMusic = document.getElementById('bgMusic');
+        
+        // Toggle cart panel
+        cartBtn.addEventListener('click', () => {
+            cartPanel.classList.remove('translate-x-full');
+            overlay.classList.remove('hidden');
+            updateCartDisplay();
+        });
+        
+        closeCart.addEventListener('click', () => {
+            cartPanel.classList.add('translate-x-full');
+            overlay.classList.add('hidden');
+        });
+        
+        overlay.addEventListener('click', () => {
+            cartPanel.classList.add('translate-x-full');
+            overlay.classList.add('hidden');
+        });
+        
+        // Music toggle
+        let isMusicPlaying = false;
+        
+        musicToggle.addEventListener('click', () => {
+            if (isMusicPlaying) {
+                bgMusic.pause();
+                musicToggle.innerHTML = '<i class="fas fa-music text-xl"></i>';
+            } else {
+                bgMusic.play();
+                musicToggle.innerHTML = '<i class="fas fa-pause text-xl"></i>';
+            }
+            isMusicPlaying = !isMusicPlaying;
+        });
+        
+        // Add to cart function
+        function addToCart(name, price) {
+            cart.push({ name, price });
+            updateCartCount();
+            
+            // Show notification
+            const notification = document.createElement('div');
+            notification.className = 'fixed bottom-4 left-4 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg z-50 animate-fade-in';
+            notification.innerHTML = `<i class="fas fa-check-circle mr-2"></i> ${name} added to cart!`;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.classList.add('animate-fade-out');
+                setTimeout(() => notification.remove(), 500);
+            }, 3000);
+        }
+        
+        // Buy now function
+        function buyNow(name, price) {
+            addToCart(name, price);
+            cartPanel.classList.remove('translate-x-full');
+            overlay.classList.remove('hidden');
+            updateCartDisplay();
+        }
+        
+        // Update cart count
+        function updateCartCount() {
+            cartCount.textContent = cart.length;
+        }
+        
+        // Update cart display
+        function updateCartDisplay() {
+            if (cart.length === 0) {
+                cartItems.innerHTML = `
+                    <div class="text-center py-8">
+                        <i class="fas fa-shopping-cart text-4xl text-gray-600 mb-4"></i>
+                        <p class="text-gray-400">Your cart is empty</p>
+                    </div>
+                `;
+            } else {
+                let itemsHTML = '';
+                let subtotal = 0;
+                
+                cart.forEach((item, index) => {
+                    subtotal += item.price;
+                    itemsHTML += `
+                        <div class="flex justify-between items-center bg-gray-800 p-3 rounded-lg">
+                            <div>
+                                <h4 class="font-medium">${item.name}</h4>
+                                <span class="text-sm text-gray-400">₹${item.price}</span>
+                            </div>
+                            <button onclick="removeFromCart(${index})" class="text-gray-400 hover:text-red-500">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    `;
+                });
+                
+                cartItems.innerHTML = itemsHTML;
+                cartSubtotal.textContent = `₹${subtotal}`;
+                cartTotal.textContent = `₹${subtotal}`;
+            }
+        }
+        
+        // Remove from cart
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartCount();
+            updateCartDisplay();
+        }
+        
+        // Checkout function
+        function checkout() {
+            if (cart.length === 0) return;
+            
+            // Show social links more prominently
+            const socialLinks = document.createElement('div');
+            socialLinks.className = 'fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-90';
+            socialLinks.innerHTML = `
+                <div class="bg-gray-900 p-8 rounded-xl max-w-md w-full neon-border">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-2xl font-bold neon-text">CONTACT US TO COMPLETE PURCHASE</h3>
+                        <button onclick="this.parentElement.parentElement.remove()" class="text-gray-400 hover:text-white">
+                            <i class="fas fa-times text-xl"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="space-y-4 mb-6">
+                        <p class="text-gray-300">Total: <span class="text-red-500 font-bold">₹${cart.reduce((sum, item) => sum + item.price, 0)}</span></p>
+                        <p class="text-gray-300">Contact us on any platform below to complete your purchase:</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 gap-4">
+                        <a href="https://www.instagram.com/avx_reg?igsh=MTR1dHR4bmxwbm53bQ%3D%3D&utm_source=qr" target="_blank" class="flex items-center justify-center bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 text-white p-3 rounded-lg transition">
+                            <i class="fab fa-instagram text-2xl mr-3"></i>
+                            <span>Instagram</span>
+                        </a>
+                        <a href="https://t.me/+rYouZ4vXZ_A3MDJl" target="_blank" class="flex items-center justify-center bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-lg transition">
+                            <i class="fab fa-telegram text-2xl mr-3"></i>
+                            <span>Telegram</span>
+                        </a>
+                        <a href="http://wa.me/6283867936993" target="_blank" class="flex items-center justify-center bg-green-500 hover:bg-green-600 text-white p-3 rounded-lg transition">
+                            <i class="fab fa-whatsapp text-2xl mr-3"></i>
+                            <span>WhatsApp</span>
+                        </a>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(socialLinks);
+        }
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add animation to elements when they come into view
+        const observerOptions = {
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.neon-card, section').forEach(element => {
+            observer.observe(element);
+        });
+    </script>
+</body>
+</html>
